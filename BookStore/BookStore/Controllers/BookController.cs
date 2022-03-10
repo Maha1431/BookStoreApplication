@@ -112,7 +112,7 @@ namespace BookStore.Controllers
                 }
                 else
                 {
-                    return this.BadRequest(new { Status = false, Message = "Bookid doesnt exists" });
+                    return this.BadRequest(new { Status = false, Message = "BookId doesn't exists" });
                 }
             }
             catch (Exception ex)

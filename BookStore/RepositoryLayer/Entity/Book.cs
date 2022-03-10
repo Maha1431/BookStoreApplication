@@ -1,11 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace RepositoryLayer.Entity
 {
    public class Book
     {
+        /*[Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Required]*/
         public int BookId { get; set; }
         public string BookName { get; set; }
         public string AuthorName { get; set; }
