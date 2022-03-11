@@ -8,9 +8,6 @@ namespace RepositoryLayer.Entity
 {
    public class Book
     {
-        /*[Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Required]*/
         public int BookId { get; set; }
         public string BookName { get; set; }
         public string AuthorName { get; set; }
