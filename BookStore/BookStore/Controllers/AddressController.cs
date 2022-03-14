@@ -10,7 +10,7 @@ namespace BookStore.Controllers
 {
     [ApiController]
     [Route("[Controller]")]
-    public class AddressController : Controller
+    public class AddressController : ControllerBase
     {
         IAddressBL addressBL;
 

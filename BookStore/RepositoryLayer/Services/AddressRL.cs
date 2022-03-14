@@ -178,6 +178,7 @@ namespace RepositoryLayer.Services
                     {
                         Addresss address = new Addresss();
                         address.AddressId = Convert.ToInt32(dr["AddressId"]);
+                        address.userId = Convert.ToInt32(dr["userId"]);
                         address.Address = dr["Address"].ToString();
                         address.City = dr["City"].ToString();
                         address.State = dr["State"].ToString();
