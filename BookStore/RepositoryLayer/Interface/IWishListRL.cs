@@ -14,6 +14,5 @@ namespace RepositoryLayer.Interface
 
         List<WishList> GetWishlistbyuserId(int userId);
 
-      //  List<WishList> GetAllWislists();
     }
 }

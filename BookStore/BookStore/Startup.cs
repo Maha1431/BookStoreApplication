@@ -50,6 +50,8 @@ namespace BookStore
             services.AddTransient<IOrdersRL, OrdersRL>();
             services.AddTransient<IFeedbackBL, FeedbackBL>();
             services.AddTransient<IFeedbackRL, FeedbackRL>();
+            services.AddTransient<IAdminBL, AdminBL>();
+            services.AddTransient<IAdminRL, AdminRL>();
 
             services.AddSwaggerGen(swagger =>
             {

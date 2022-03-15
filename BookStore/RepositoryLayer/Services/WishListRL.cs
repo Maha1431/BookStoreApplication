@@ -143,56 +143,7 @@ namespace RepositoryLayer.Services
             }
 
         }
-        public List<WishList> GetAllWishlists()
-        {
-            connection = new SqlConnection(this.Configuration.GetConnectionString("BookStore"));
-            try
-            {
-                using (connection)
-                {
-                    List<WishList> wishlist = new List<WishList>();
-                    SqlCommand cmd = new SqlCommand("sp_GetAllWishlist", connection);
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    connection.Open();
-                    SqlDataReader dr = cmd.ExecuteReader();
-
-                    if (dr.HasRows)
-                    {
-                        while (dr.Read())
-                        {
-                            WishList wish = new WishList();
-                            BookModel bookModel = new BookModel();
-                            bookModel.BookName = dr["BookName"].ToString();
-                            bookModel.AuthorName = dr["AuthorName"].ToString();
-                            bookModel.DiscountPrice = Convert.ToInt32(dr["DiscountPrice"]);
-                            bookModel.OriginalPrice = Convert.ToInt32(dr["OriginalPrice"]);
-                            bookModel.Rating = Convert.ToInt32(dr["Rating"]);
-                            bookModel.Reviewer = Convert.ToInt32(dr["Reviewer"]);
-                            bookModel.Image = dr["Image"].ToString();
-                            bookModel.BookCount = Convert.ToInt32(dr["BookCount"]);
-                            wish.WishlistId = Convert.ToInt32(dr["WishlistId"]);
-                            //wish.userId = Convert.ToInt32(dr["userId"]);
-                           // wish.BookId = Convert.ToInt32(dr["BookId"]);
-                            wish.Book = bookModel;
-                            wishlist.Add(wish);
-                        }
-                        return wishlist;
-                    }
-                    else
-                    {
-                        return null;
-                    }
-                }
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-            finally
-            {
-                connection.Close();
-            }
-        }
+       
 
 
     }

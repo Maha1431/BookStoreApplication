@@ -82,25 +82,6 @@ namespace BookStore.Controllers
                 return this.NotFound(new { Status = false, Message = ex.Message });
             }
         }
-       /* [HttpGet("getAllWishlists")]
-        public IActionResult GetAllWishlists()
-        {
-            try
-            {
-                var result = this.wishlistBL.GetAllWislists();
-                if (result != null)
-                {
-                    return this.Ok(new { Status = true, Message = "Retrieval all wishlist succssful", Data = result });
-                }
-                else
-                {
-                    return this.BadRequest(new { Status = false, Message = "Retrieval is unsucessful" });
-                }
-            }
-            catch (Exception ex)
-            {
-                return this.NotFound(new { Status = false, Message = ex.Message });
-            }
-        }*/
+        
     }
 }

@@ -8,19 +8,20 @@ using System.Text;
 
 namespace BusinessLayer.Services
 {
-   public class WishListBL:IWishListBL
+   public class AdminBL:IAdminBL
     {
-        IWishListRL wishlistRL;
-        public WishListBL(IWishListRL wishlistRL)
+
+        IAdminRL adminRL;
+        public AdminBL(IAdminRL adminRL)
         {
-            this.wishlistRL = wishlistRL;
+            this.adminRL = adminRL;
         }
 
-        public string AddWishlist(WishListModel wishlist)
+        public string AddAdmin(AdminModel admin)
         {
             try
             {
-                return this.wishlistRL.AddWishlist(wishlist);
+                return this.adminRL.AddAdmin(admin);
             }
             catch (Exception e)
             {
@@ -28,11 +29,12 @@ namespace BusinessLayer.Services
             }
         }
 
-        public bool RemoveBookFromWishlist(int WishlistId)
+        public bool UpdateAdmin(int AdminId, AdminModel admin)
         {
             try
             {
-                if (wishlistRL.RemoveBookFromWishlist(WishlistId))
+
+                if (adminRL.UpdateAdmin(AdminId, admin))
                     return true;
                 else
                     return false;
@@ -42,18 +44,17 @@ namespace BusinessLayer.Services
                 throw e;
             }
         }
-        public List<WishList> GetWishlistbyuserId(int userId)
+
+        public List<Admin> GetAllAdminByAdminId(int AdminId)
         {
             try
             {
-                return this.wishlistRL.GetWishlistbyuserId(userId);
+                return this.adminRL.GetAllAdminByAdminId(AdminId);
             }
             catch (Exception e)
             {
                 throw new Exception(e.Message);
             }
         }
-
-       
     }
 }

@@ -75,24 +75,9 @@ namespace RepositoryLayer.Services
                         while (dr.Read())
                         {
                             FeedBack model = new FeedBack();
-                            /*BookModel bookModel = new BookModel();
-                            bookModel.BookName = dr["BookName"].ToString();
-                            bookModel.AuthorName = dr["AuthorName"].ToString();
-                            bookModel.DiscountPrice = Convert.ToInt32(dr["DiscountPrice"]);
-                            bookModel.OriginalPrice = Convert.ToInt32(dr["OriginalPrice"]);
-                            bookModel.BookDescription = dr["BookDescription"].ToString();
-                            bookModel.Rating = Convert.ToInt32(dr["Rating"]);
-                            bookModel.Reviewer = Convert.ToInt32(dr["Reviewer"]);
-                            bookModel.Image = dr["Image"].ToString();
-                            bookModel.BookCount = Convert.ToInt32(dr["BookCount"]);*/
-                            model.FeedbackId = Convert.ToInt32(dr["FeedbackId"]);
-                            model.userId = Convert.ToInt32(dr["userId"]);
-                            model.BookId = Convert.ToInt32(dr["BookId"]);
                             model.FeedBackUserName = dr["FeedBackUserName"].ToString();
                             model.Comments = dr["Comments"].ToString();
                             model.Ratings = Convert.ToInt32(dr["Ratings"]);
-                           
-                           // model.model = bookModel;
                             feedback.Add(model);
                         }
                         return feedback;
