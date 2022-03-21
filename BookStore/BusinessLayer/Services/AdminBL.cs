@@ -28,13 +28,51 @@ namespace BusinessLayer.Services
                 throw new Exception(e.Message);
             }
         }
+        public string Login(string Email, string Password)
+        {
+            try
+            {
+                return adminRL.Login(Email, Password);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+        public string AdminAddBook(AdminBookModel admin)
+        {
+            try
+            {
+                return this.adminRL.AdminAddBook(admin);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
 
-        public bool UpdateAdmin(int AdminId, AdminModel admin)
+        }
+
+       
+        public bool AdminUpdateBook(int BookId,int AdminId, AdminUpdateBook admin)
         {
             try
             {
 
-                if (adminRL.UpdateAdmin(AdminId, admin))
+                if (adminRL.AdminUpdateBooK(BookId,AdminId, admin))
+                    return true;
+                else
+                    return false;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+        public bool AdminDeleteBook(int BookId)
+        {
+            try
+            {
+                if (adminRL.AdminDeleteBook(BookId))
                     return true;
                 else
                     return false;
@@ -45,15 +83,16 @@ namespace BusinessLayer.Services
             }
         }
 
-        public List<Admin> GetAllAdminByAdminId(int AdminId)
+        public List<AdminBookModel> AdminGetAllBooks()
         {
             try
             {
-                return this.adminRL.GetAllAdminByAdminId(AdminId);
+                return this.adminRL.AdminGetAllBooks();
+
             }
             catch (Exception e)
             {
-                throw new Exception(e.Message);
+                throw e;
             }
         }
     }

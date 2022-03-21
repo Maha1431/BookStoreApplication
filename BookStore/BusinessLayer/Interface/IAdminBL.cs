@@ -10,8 +10,14 @@ namespace BusinessLayer.Interface
     {
         string AddAdmin(AdminModel admin);
 
-        bool UpdateAdmin(int AdminId, AdminModel admin);
+        string Login(string Email, string Password);
 
-        List<Admin> GetAllAdminByAdminId (int AdminId);
+        string AdminAddBook(AdminBookModel admin);
+
+        bool AdminUpdateBook(int BookId, int AdminId, AdminUpdateBook admin);
+
+        bool AdminDeleteBook(int BookId);
+
+        List<AdminBookModel> AdminGetAllBooks();
     }
 }

@@ -21,13 +21,13 @@ namespace BookStore.Controllers
         {
             this.adminBL = adminBL;
         }
-        [HttpPost("addAdmin")]
+        [HttpPost("AddAdmin")]
         public IActionResult AddAdmin(AdminModel admin)
         {
             try
             {
                 var result = this.adminBL.AddAdmin(admin);
-                if (result.Equals("Admin Added succssfully"))
+                if (result.Equals("Admin Added successfully"))
                 {
                     return this.Ok(new { success = true, Message = result });
                 }
@@ -40,20 +40,64 @@ namespace BookStore.Controllers
             {
                 throw e;
             }
+
         }
-        [HttpPut("updateAdmin/{AdminId}")]
-        public IActionResult UpdateAdmin(int AdminId, AdminModel admin)
+        [HttpPost("login/{Email}/{Password}")]
+        public IActionResult UserLogin(string Email, string Password)
         {
             try
             {
-                var result = this.adminBL.UpdateAdmin(AdminId, admin);
-                if (result.Equals(true))
+                var result = this.adminBL.Login(Email, Password);
+                if (result != null)
                 {
-                    return this.Ok(new { Status = true, Message = "Admin Updated Successfully" });
+                    return this.Ok(new { Success = true, message = "Login Successful", token = result });
                 }
                 else
                 {
-                    return this.BadRequest(new { Status = false, Message = "Admin Updated Unsuccessfull" });
+                    return this.Ok(new { Success = false, message = "Invalid Admin email and password" });
+                }
+            }
+            catch (Exception e)
+            {
+                return this.BadRequest(new { success = false, message = e.Message });
+
+            }
+        }
+        [HttpPost("AdminAddBook")]
+        public IActionResult AdminAddBook(AdminBookModel admin)
+        {
+            try
+            {
+                var result = this.adminBL.AdminAddBook(admin);
+                if (result.Equals("Admin Added Books"))
+                {
+                    return this.Ok(new { success = true, Message = result });
+                }
+                else
+                {
+                    return this.BadRequest(new { success = true, Message = $"Admin Book Added Unsuccessfull" });
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+        }
+
+        [HttpPut("AdminupdateBook/{BookId}/{AdminId}")]
+        public IActionResult AdminUpdateBook(int BookId,int AdminId, AdminUpdateBook admin)
+        {
+            try
+            {
+                var result = this.adminBL.AdminUpdateBook(BookId,AdminId, admin);
+                if (result.Equals(true))
+                {
+                    return this.Ok(new { Status = true, Message = "Admin Updated Book Successfully" });
+                }
+                else
+                {
+                    return this.BadRequest(new { Status = false, Message = "Admin Updated Book Unsuccessfull" });
                 }
             }
             catch (Exception ex)
@@ -61,24 +105,42 @@ namespace BookStore.Controllers
                 return this.NotFound(new { Status = false, Message = ex.Message });
             }
         }
-        [Authorize]
-        [HttpGet("getAllAdminbyAdminId/{AdminId}")]
-        public IActionResult GetAllAdmibyAdminId(int AdminId)
+        [HttpDelete("AdminDeleteBook/{BookId}")]
+        public IActionResult AdminDeleteBook(int BookId)
         {
             try
             {
-               /* int UserId = Convert.ToInt32(User.Claims.FirstOrDefault(x => x.Type == "userId").Value);
-                var result1 = Convert.ToInt32(User.FindFirst("userId").Value);
-               */
-               var result = User.FindFirst("Email").Value.ToString();
-                if (result!= null)
+                var result = this.adminBL.AdminDeleteBook(BookId);
+                if (result.Equals(true))
                 {
-                   var data = this.adminBL.GetAllAdminByAdminId(AdminId);
-                    return this.Ok(new { Status = true, Message = "Retrieval all admin succssful", response = data});
+                    return this.Ok(new { success = true, message = $" Admin Book deleted Successfully ", response = BookId });
                 }
                 else
                 {
-                    return this.BadRequest(new { Status = false, Message = "AdminId not Exist" });
+                    return this.BadRequest(new { Status = false, Message = result });
+                }
+
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+        [Authorize]
+        [HttpGet("AdminGetAllBooks")]
+        public IActionResult GetAllAdmibyAdminId()
+        {
+            try
+            {
+               var result = User.FindFirst("Email").Value.ToString();
+                if (result!= null)
+                {
+                   var data = this.adminBL.AdminGetAllBooks();
+                    return this.Ok(new { Status = true, Message = "Retrieval the admin all books succssful", response = data});
+                }
+                else
+                {
+                    return this.BadRequest(new { Status = false, Message = "Retrieval not successfull" });
                 }
             }
             catch (Exception ex)

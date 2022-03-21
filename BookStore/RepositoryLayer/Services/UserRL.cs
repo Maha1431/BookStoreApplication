@@ -119,7 +119,7 @@ namespace RepositoryLayer
             return tokenHandler.WriteToken(token);
 
         }
-        private static string GenerateJWTToken(string Email, string userId)
+        private static string GenerateJWTToken(string Email, int userId)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             var tokenKey = Encoding.ASCII.GetBytes("THIS_IS_MY_KEY_TO_GENERATE_TOKEN");
